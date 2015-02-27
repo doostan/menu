@@ -1,0 +1,8 @@
+{
+    "name" : "doostan/menu",
+    "autoload" : {
+        "psr-0" : {
+            "Doostan" : "./src"
+        }
+    }
+}
