@@ -62,6 +62,11 @@ class Item implements \Iterator, \Countable
         return $child;
     }
     
+    public function toHtml(Maker\MakerInterface $menuMaker)
+    {
+        
+    }
+    
     public function rewind()
     {
         $this->iteratorPos=0;
