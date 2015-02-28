@@ -9,7 +9,9 @@ class Item implements \Iterator, \Countable
     
     protected $parent;
     
-    protected $children;
+    protected $children=array();
+    
+    protected $properties=array();
     
     private $iteratorPos=0;
     
@@ -49,6 +51,24 @@ class Item implements \Iterator, \Countable
         return $this->parent;
     }
     
+    public function addProperty($key, $value)
+    {
+        $this->properties[$key] = $value;
+        return $this;
+    }
+    
+    public function getProperty($key)
+    {
+        if(isset($this->properties[$key])) {
+            return $this->properties[$key];
+        }
+    }
+    
+    public function getProperties()
+    {
+        return $this->properties;
+    }
+    
     public function getChildren()
     {
         return $this->children;
@@ -62,9 +82,9 @@ class Item implements \Iterator, \Countable
         return $child;
     }
     
-    public function toHtml(Maker\MakerInterface $menuMaker)
+    public function make(Maker\MakerInterface $menuMaker)
     {
-        
+        return $menuMaker->make($this);
     }
     
     public function rewind()
