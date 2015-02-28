@@ -11,8 +11,6 @@ class Item implements \Iterator, \Countable
     
     protected $children;
     
-    private static $rawMenu;
-    
     private $iteratorPos=0;
     
     public function __construct($title)
@@ -62,24 +60,6 @@ class Item implements \Iterator, \Countable
         $child->setParent($this);
         $this->children[] = $child;
         return $child;
-    }
-    
-    public function getRawMenu($start=true)
-    {
-        return var_export($this);
-        
-        if($start) {
-            self::$rawMenu[$this->getId()]=[];
-            self::$rawMenu[$this->getId()][]=  $this;
-        }
-        
-        foreach($this as $child) {
-            self::$rawMenu[]=  $child;
-            if(count($child)) {
-                $child->getRawMenu(false);
-            }
-        }
-        return self::$rawMenu[$this->getId()];
     }
     
     public function rewind()
