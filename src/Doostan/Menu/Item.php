@@ -15,7 +15,7 @@ class Item implements \Iterator, \Countable
     
     private $iteratorPos=0;
     
-    public function __construct($title)
+    public function __construct($title=null)
     {
         $this->setTitle($title);
         $this->setId();
