@@ -3,35 +3,43 @@ namespace Doostan\Menu\Maker;
 
 class NestedUlsMaker implements MakerInterface
 {
-    private $menu;
-    
-    public function __construct()
-    {
-        $this->menu = '<ul>';
-    }
+    private $menu='';
     
     public function make(\Doostan\Menu\Item $item)
     {
-        
-        $this->menu .= '<li ';
-        $props = '';
-        foreach($item->getProperties() as $key => $val) {
-            $props .= $key.'="'.$val.' "';
+        $parentUl=false; // parent ul element required?
+        if($item->getParent() === null) {
+            if($item->getTitle() != '') {
+                $parentUl=true; // parent ul element is required
+                $this->menu .= '<ul>';
+                $this->menu .= '<li ';
+                $props = '';
+                foreach($item->getProperties() as $key => $val) {
+                    $props .= $key.'="'.$val.' "';
+                }
+                $this->menu .= $props. '>'.$item->getTitle();
+            }
+        } else {
+            $this->menu .= '<li ';
+                $props = '';
+                foreach($item->getProperties() as $key => $val) {
+                    $props .= $key.'="'.$val.' "';
+                }
+                $this->menu .= $props. '>'.$item->getTitle();
         }
-        $this->menu .= $props. '>'.$item->getTitle();
-        
         if(!empty($item->getChildren())) {
-            $this->menu .= '<ul >';
+            $this->menu .= '<ul>';
             foreach($item as $child) {
-                
                 $this->make($child);
-                
             }
             $this->menu .= '</ul>';
         }
-        $this->menu .= '</li>';
         
-        
-        return $this->menu.'</ul>';
+        if($parentUl) {
+            $this->menu .= '</li></ul>';
+        } else {
+            $this->menu .= '</li>';
+        }
+        return $this->menu;
     }
 }
