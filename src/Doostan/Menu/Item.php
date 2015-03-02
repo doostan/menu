@@ -2,10 +2,12 @@
 /**
  * Doostan\Menu component.
  * 
- * @license http://opensource.org/licenses/MIT MIT license
- * @copyright Copyright (c) 2015 https://github.com/doostan
- * @author doostan doostan.github@gmail.com
+ * @package     \Doostan\Menu
+ * @license     http://opensource.org/licenses/MIT MIT license
+ * @copyright   Copyright (c) 2015 https://github.com/doostan
+ * @author      doostan doostan.github@gmail.com
  */
+
 namespace Doostan\Menu;
 
 class Item implements \Iterator, \Countable
