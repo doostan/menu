@@ -1,4 +1,13 @@
 <?php
+/**
+ * Doostan\Menu component.
+ * 
+ * @link        https://github.com/doostan/menu
+ * @license     http://opensource.org/licenses/MIT MIT license
+ * @copyright   Copyright (c) 2015 https://github.com/doostan
+ * @author      doostan doostan.github@gmail.com
+ */
+
 namespace Doostan\Menu\Maker;
 
 class NestedUlsMaker implements MakerInterface
@@ -9,6 +18,7 @@ class NestedUlsMaker implements MakerInterface
     {
         $parentUl=false; // parent ul element required?
         if($item->getParent() === null) {
+            // this is the parent ul element
             if($item->getTitle() != '') {
                 $parentUl=true; // parent ul element is required
                 $this->menu .= '<ul>';

@@ -2,7 +2,7 @@
 /**
  * Doostan\Menu component.
  * 
- * @package     \Doostan\Menu
+ * @link        https://github.com/doostan/menu
  * @license     http://opensource.org/licenses/MIT MIT license
  * @copyright   Copyright (c) 2015 https://github.com/doostan
  * @author      doostan doostan.github@gmail.com
