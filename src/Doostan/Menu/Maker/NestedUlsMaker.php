@@ -10,32 +10,30 @@
 
 namespace Doostan\Menu\Maker;
 
+use Doostan\Menu\Item;
+
 class NestedUlsMaker implements MakerInterface
 {
     private $menu='';
     
-    public function make(\Doostan\Menu\Item $item)
+    public function make(Item $item)
     {
-        $parentUl=false; // parent ul element required?
-        if($item->getParent() === null) {
-            // this is the parent ul element
+        $isParentUl=($item->getParent() === null) ? true : false;
+        $parentUlRequired=false; // parent ul element is required?
+        
+        if($isParentUl) {
             if($item->getTitle() != '') {
-                $parentUl=true; // parent ul element is required
+                $parentUlRequired=true; // parent ul element is required
                 $this->menu .= '<ul>';
-                $this->menu .= '<li ';
-                $props = '';
-                foreach($item->getProperties() as $key => $val) {
-                    $props .= $key.'="'.$val.' "';
-                }
-                $this->menu .= $props. '>'.$item->getTitle();
             }
-        } else {
-            $this->menu .= '<li ';
-                $props = '';
-                foreach($item->getProperties() as $key => $val) {
-                    $props .= $key.'="'.$val.' "';
-                }
-                $this->menu .= $props. '>'.$item->getTitle();
+        }
+        if(!$isParentUl || ($isParentUl && $parentUlRequired) ) {
+        $this->menu .= '<li ';
+            $props = '';
+            foreach($item->getProperties() as $key => $val) {
+                $props .= $key.'="'.$val.' "';
+            }
+            $this->menu .= $props. '>'.$item->getTitle();
         }
         if(!empty($item->getChildren())) {
             $this->menu .= '<ul>';
@@ -45,7 +43,7 @@ class NestedUlsMaker implements MakerInterface
             $this->menu .= '</ul>';
         }
         
-        if($parentUl) {
+        if($isParentUl && $parentUlRequired) {
             $this->menu .= '</li></ul>';
         } else {
             $this->menu .= '</li>';
