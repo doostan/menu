@@ -16,6 +16,8 @@ class Item implements \Iterator, \Countable
     
     protected $title;
     
+    protected $link;
+    
     protected $parent;
     
     protected $children=array();
@@ -48,6 +50,16 @@ class Item implements \Iterator, \Countable
     public function getTitle()
     {
         return $this->title;
+    }
+    
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
+    
+    public function getLink()
+    {
+        return $this->link;
     }
     
     public function setParent(\Doostan\Menu\Item $parent)
