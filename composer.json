@@ -1,5 +1,13 @@
 {
     "name" : "doostan/menu",
+    "type": "library",
+    "description": "tree structure menu",
+    "keywords": ["tree","menu"],
+    "homepage": "https://github.com/doostan/menu",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0"
+    },
     "autoload" : {
         "psr-0" : {
             "Doostan" : "./src"
