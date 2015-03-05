@@ -54,7 +54,11 @@ class Item implements \Iterator, \Countable
     
     public function setLink($link)
     {
+        if(gettype($link) != 'string') {
+            throw new \Exception("the link \"{$link}\" must be string type");
+        }
         $this->link = $link;
+        return $this;
     }
     
     public function getLink()

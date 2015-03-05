@@ -33,7 +33,13 @@ class NestedUlsMaker implements MakerInterface
             foreach($item->getProperties() as $key => $val) {
                 $props .= $key.'="'.$val.' "';
             }
-            $this->menu .= $props. '>'.$item->getTitle();
+            $this->menu .= $props. '>';
+            
+            if($item->getLink() == '') {
+                $this->menu .= $item->getTitle();
+            } else {
+                $this->menu .= "<a href=\"{$item->getLink()}\" >{$item->getTitle()}</a>";
+            }
         }
         if(!empty($item->getChildren())) {
             $this->menu .= '<ul>';
