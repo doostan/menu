@@ -44,7 +44,8 @@ class Item implements \Iterator, \Countable
     
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = (string)$title;
+        return $this;
     }
     
     public function getTitle()
@@ -54,10 +55,7 @@ class Item implements \Iterator, \Countable
     
     public function setLink($link)
     {
-        if(gettype($link) != 'string') {
-            throw new \Exception("the link \"{$link}\" must be string type");
-        }
-        $this->link = $link;
+        $this->link = (string)$link;
         return $this;
     }
     
@@ -69,6 +67,7 @@ class Item implements \Iterator, \Countable
     public function setParent(\Doostan\Menu\Item $parent)
     {
         $this->parent = $parent;
+        return $this;
     }
     
     public function getParent()
