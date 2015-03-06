@@ -10,7 +10,7 @@
 
 namespace Doostan\Menu\Maker;
 
-use \Doostan\Menu\Item;
+use Doostan\Menu\Item;
 
 interface MakerInterface
 {

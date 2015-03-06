@@ -10,7 +10,7 @@
 
 namespace Doostan\Menu;
 
-class Item implements \Iterator, \Countable
+class Item implements \Iterator, \ArrayAccess ,\Countable
 {
     protected $id;
     
@@ -106,6 +106,22 @@ class Item implements \Iterator, \Countable
         return $child;
     }
     
+    public function moveTo(Item $newParentItem)
+    {
+        $currParentItem = $this->getParent();
+        if($currParentItem instanceof Item) {
+            foreach($currParentItem as $key => $item) {
+                if($item == $this) {
+                    unset($currParentItem[$key]);
+                    break;
+                }
+            }
+            $this->setParent($newParentItem);
+            $newParentItem->children[] = $this;
+        }
+        return $this;
+    }
+    
     public function make(Maker\MakerInterface $menuMaker)
     {
         return $menuMaker->make($this);
@@ -131,8 +147,33 @@ class Item implements \Iterator, \Countable
         ++$this->iteratorPos;
     }
     
-    public function valid(){
+    public function valid()
+    {
         return isset($this->children[$this->iteratorPos]);
+    }
+    
+    public function offsetSet($offset, $value) 
+    {
+        if (is_null($offset)) {
+            $this->children[] = $value;
+        } else {
+            $this->children[$offset] = $value;
+        }
+    }
+
+    public function offsetGet($offset) 
+    {
+        return isset($this->children[$offset]) ? $this->children[$offset] : null;
+    }
+    
+    public function offsetExists($offset) 
+    {
+        return isset($this->children[$offset]);
+    }
+
+    public function offsetUnset($offset) 
+    {
+        unset($this->children[$offset]);
     }
     
     public function count()
