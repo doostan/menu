@@ -10,7 +10,9 @@
 
 namespace Doostan\Menu\Maker;
 
+use \Doostan\Menu\Item;
+
 interface MakerInterface
 {
-    public function make(\Doostan\Menu\Item $item);
+    public function make(Item $item);
 }
